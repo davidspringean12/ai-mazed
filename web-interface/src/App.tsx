@@ -1,66 +1,64 @@
-import { useEffect, useRef } from 'react';
-import { ChatMessage } from './components/ChatMessage';
-import { ChatInput } from './components/ChatInput';
+import { motion } from 'framer-motion';
+import { MessageList } from './components/MessageList';
+import { InputBox } from './components/InputBox';
+import { ThemeToggle } from './components/ThemeToggle';
 import { useChatSession } from './hooks/useChatSession';
-import './App.css';
 
 function App() {
   const { messages, isLoading, sendMessage, submitFeedback } = useChatSession();
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
 
   return (
-    <div className="app">
-      <header className="chat-header">
-        <h1>🎓 Asistent Universitar</h1>
-        <p>Întreabă-mă orice despre Facultatea de Științe Economice</p>
-      </header>
-
-      <div className="chat-container">
-        <div className="messages-container">
-          {messages.length === 0 && (
-            <div className="welcome-message">
-              <h2>Bun venit!</h2>
-              <p>Sunt aici să te ajut cu informații despre:</p>
-              <ul>
-                <li>Calendarul academic și orarul cursurilor</li>
-                <li>Programe de licență și master</li>
-                <li>Profesori și departamente</li>
-                <li>Activități de cercetare</li>
-                <li>Burse și facilități studenți</li>
-              </ul>
-            </div>
-          )}
-          {messages.map((message, index) => (
-            <ChatMessage
-              key={index}
-              message={message}
-              onFeedback={submitFeedback}
-            />
-          ))}
-          {isLoading && (
-            <div className="loading-indicator">
-              <div className="typing-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
+    <div className="flex flex-col h-screen max-w-5xl mx-auto bg-white dark:bg-slate-900">
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 dark:from-blue-800 dark:via-blue-700 dark:to-blue-900 text-white px-6 py-6 shadow-lg"
+      >
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
         </div>
-
-        <div className="chat-input-container">
-          <ChatInput onSend={sendMessage} disabled={isLoading} />
+        <div className="text-center">
+          <motion.h1
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            className="text-2xl md:text-3xl font-bold mb-2 flex items-center justify-center gap-2"
+          >
+            <span className="text-3xl md:text-4xl">🎓</span>
+            Asistent Universitar
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-blue-50 text-sm md:text-base"
+          >
+            Întreabă-mă orice despre Facultatea de Științe Economice
+          </motion.p>
         </div>
+      </motion.header>
+
+      <div className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-900">
+        <MessageList
+          messages={messages}
+          isLoading={isLoading}
+          onFeedback={submitFeedback}
+        />
+
+        <InputBox onSend={sendMessage} disabled={isLoading} />
       </div>
 
-      <footer className="chat-footer">
-        <p>Facultatea de Științe Economice - ULBS Sibiu</p>
-      </footer>
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="bg-slate-100 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-3 px-6 text-center"
+      >
+        <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
+          Facultatea de Științe Economice - ULBS Sibiu
+        </p>
+      </motion.footer>
     </div>
   );
 }
