@@ -13,7 +13,7 @@ function App() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 dark:from-blue-800 dark:via-blue-700 dark:to-blue-900 text-white px-6 py-6 shadow-lg"
+        className="relative bg-linear-to-br from-blue-600 via-blue-500 to-blue-700 dark:from-blue-800 dark:via-blue-700 dark:to-blue-900 text-white px-6 py-6 shadow-lg"
       >
         <div className="absolute top-4 right-4">
           <ThemeToggle />

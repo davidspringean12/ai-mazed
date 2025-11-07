@@ -32,7 +32,7 @@ export function InputBox({ onSend, disabled = false }: InputBoxProps) {
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e as any);
+      handleSubmit(e as unknown as FormEvent);
     }
   };
 
@@ -90,7 +90,7 @@ export function InputBox({ onSend, disabled = false }: InputBoxProps) {
           className={`p-3 rounded-2xl font-semibold transition-all shadow-sm ${
             disabled || !input.trim()
               ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
-              : 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30'
+              : 'bg-linear-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30'
           }`}
           aria-label="Send message"
         >

@@ -1,2 +1,36 @@
+# Environment variables
 .env
+*.env.local
+
+# Dependencies
 node_modules/
+web-interface/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Build outputs
+web-interface/dist/
+web-interface/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Package manager
+package-lock.json
+web-interface/package-lock.json
