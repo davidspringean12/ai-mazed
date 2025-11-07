@@ -2,7 +2,7 @@
   "source_to_url": {
     "data/departament.txt": "https://economice.ulbsibiu.ro/departament/",
     "data/cercetare.txt": "https://economice.ulbsibiu.ro/cercetare",
-    "data/structura-2025-2026.txt": "https://economice.ulbsibiu.ro/calendar-academic",
+    "data/structura-2025-2026.txt": "https://economice.ulbsibiu.ro/structura-2025-2026/",
     "data/licentamk.txt": "https://economice.ulbsibiu.ro/programe-studii"
   },
   "fallback_url": "https://economice.ulbsibiu.ro"

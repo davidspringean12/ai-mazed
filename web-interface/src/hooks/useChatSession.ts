@@ -14,31 +14,38 @@ export function useChatSession() {
 
   const initializeSession = async () => {
     const sessionId = uuidv4();
+    
+    // Create session object immediately (don't wait for Supabase)
+    const newSession: ChatSession = {
+      id: sessionId,
+      started_at: new Date().toISOString(),
+      last_activity: new Date().toISOString(),
+      metadata: {
+        user_agent: navigator.userAgent,
+        referrer: document.referrer,
+      },
+    };
+    
+    setSession(newSession);
 
-    const { data, error } = await supabase
-      .from('chat_sessions')
-      .insert({
-        id: sessionId,
-        metadata: {
-          user_agent: navigator.userAgent,
-          referrer: document.referrer,
-        },
-      })
-      .select()
-      .single();
+    // Try to store in Supabase (non-blocking, ignore errors)
+    try {
+      await supabase
+        .from('chat_sessions')
+        .insert({
+          id: sessionId,
+          metadata: newSession.metadata,
+        });
 
-    if (error) {
-      console.error('Error creating session:', error);
-      return;
+      await supabase.from('analytics_events').insert({
+        event_type: 'session_start',
+        session_id: sessionId,
+        metadata: { timestamp: new Date().toISOString() },
+      });
+    } catch (error) {
+      console.warn('Could not store session in Supabase (tables may not exist):', error);
+      // Continue anyway - session works without database
     }
-
-    setSession(data);
-
-    await supabase.from('analytics_events').insert({
-      event_type: 'session_start',
-      session_id: sessionId,
-      metadata: { timestamp: new Date().toISOString() },
-    });
   };
 
   const sendMessage = async (content: string) => {
@@ -55,13 +62,15 @@ export function useChatSession() {
     try {
       const startTime = Date.now();
 
+      // Use local API server instead of Supabase Edge Function
+      // Port 5001 because macOS Control Center blocks port 5000
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`,
+        `${apiUrl}/api/chat`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify({
             session_id: session.id,
@@ -89,23 +98,33 @@ export function useChatSession() {
 
       setMessages((prev) => [...prev, assistantMessage]);
 
-      await supabase.from('chat_sessions').update({
-        last_activity: new Date().toISOString(),
-      }).eq('id', session.id);
+      // Store analytics (non-blocking, ignore errors)
+      try {
+        await supabase.from('chat_sessions').update({
+          last_activity: new Date().toISOString(),
+        }).eq('id', session.id);
 
-      await supabase.from('analytics_events').insert({
-        event_type: 'message_sent',
-        session_id: session.id,
-        metadata: { response_time_ms: responseTime },
-      });
+        await supabase.from('analytics_events').insert({
+          event_type: 'message_sent',
+          session_id: session.id,
+          metadata: { response_time_ms: responseTime },
+        });
+      } catch (analyticsError) {
+        console.warn('Analytics error (non-critical):', analyticsError);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
 
-      await supabase.from('analytics_events').insert({
-        event_type: 'error',
-        session_id: session.id,
-        metadata: { error: String(error) },
-      });
+      // Try to log error (non-blocking)
+      try {
+        await supabase.from('analytics_events').insert({
+          event_type: 'error',
+          session_id: session.id,
+          metadata: { error: String(error) },
+        });
+      } catch {
+        // Ignore analytics errors
+      }
 
       setMessages((prev) => [
         ...prev,
