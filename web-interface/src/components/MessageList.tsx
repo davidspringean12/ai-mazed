@@ -54,10 +54,10 @@ export function MessageList({ messages, isLoading, onFeedback }: MessageListProp
           >
             🎓
           </motion.div>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
             Bun venit!
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-md">
+          <p className="text-slate-600 mb-8 max-w-md">
             Sunt aici să te ajut cu informații despre Facultatea de Științe Economice
           </p>
           <motion.div
@@ -79,10 +79,10 @@ export function MessageList({ messages, isLoading, onFeedback }: MessageListProp
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1 }}
-                className="flex items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow"
+                className="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
               >
                 <span className="text-2xl">{item.icon}</span>
-                <span className="text-sm text-slate-700 dark:text-slate-300 text-left">
+                <span className="text-sm text-slate-700 text-left">
                   {item.text}
                 </span>
               </motion.div>

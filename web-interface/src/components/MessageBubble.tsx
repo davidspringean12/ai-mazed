@@ -49,7 +49,7 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
             className={`font-medium underline transition-colors ${
               isUser
                 ? 'text-blue-100 hover:text-white'
-                : 'text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300'
+                : 'text-blue-600 hover:text-blue-700'
             }`}
           >
             {match[2]}
@@ -88,7 +88,7 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
         className={`group relative px-4 py-3 rounded-2xl shadow-sm ${
           isUser
             ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-br-sm'
-            : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-sm'
+            : 'bg-white text-slate-900 border border-slate-200 rounded-bl-sm'
         }`}
       >
         <div className="whitespace-pre-wrap break-words leading-relaxed">
@@ -99,7 +99,7 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
           <div className={`mt-3 pt-3 border-t ${
             isUser
               ? 'border-blue-400/30'
-              : 'border-slate-200 dark:border-slate-700'
+              : 'border-slate-200'
           }`}>
             <a
               href={message.retrieved_url}
@@ -108,7 +108,7 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
               className={`text-sm font-medium transition-colors flex items-center gap-1 ${
                 isUser
                   ? 'text-blue-100 hover:text-white'
-                  : 'text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300'
+                  : 'text-blue-600 hover:text-blue-700'
               }`}
             >
               Vezi mai multe detalii →
@@ -121,13 +121,13 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleCopy}
-            className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-100 dark:bg-slate-700 p-2 rounded-full shadow-md hover:bg-slate-200 dark:hover:bg-slate-600"
+            className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-100 p-2 rounded-full shadow-md hover:bg-slate-200"
             aria-label="Copy message"
           >
             {copied ? (
-              <FiCheck className="w-3 h-3 text-green-600 dark:text-green-400" />
+              <FiCheck className="w-3 h-3 text-green-600" />
             ) : (
-              <FiCopy className="w-3 h-3 text-slate-600 dark:text-slate-300" />
+              <FiCopy className="w-3 h-3 text-slate-600" />
             )}
           </motion.button>
         )}
@@ -137,30 +137,30 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
         <div className="flex items-center gap-2 px-2 text-sm">
           {!feedbackGiven ? (
             <>
-              <span className="text-slate-500 dark:text-slate-400 text-xs">A fost util?</span>
+              <span className="text-slate-500 text-xs">A fost util?</span>
               <motion.button
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => handleFeedback('helpful')}
-                className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
                 title="Util"
                 aria-label="Mark as helpful"
               >
-                <FiThumbsUp className="w-4 h-4 text-slate-600 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400" />
+                <FiThumbsUp className="w-4 h-4 text-slate-600 hover:text-green-600" />
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => handleFeedback('not_helpful')}
-                className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
                 title="Nu e util"
                 aria-label="Mark as not helpful"
               >
-                <FiThumbsDown className="w-4 h-4 text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400" />
+                <FiThumbsDown className="w-4 h-4 text-slate-600 hover:text-red-600" />
               </motion.button>
             </>
           ) : (
-            <span className="text-green-600 dark:text-green-400 text-xs font-medium">
+            <span className="text-green-600 text-xs font-medium">
               Mulțumim pentru feedback!
             </span>
           )}
