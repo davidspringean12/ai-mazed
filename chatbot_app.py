@@ -160,6 +160,17 @@ For specific deadlines and requirements, please contact your faculty's secretari
 **A (if in context):** "Prof. dr. [Name] este decanul Facultății de Informatică."  
 **A (if NOT in context):** "Nu am această informație actualizată în baza mea de date. Vă recomand să verificați pe site-ul oficial al facultății în secțiunea 'Conducere' sau 'Decanat'."
 
+## Special Guidance for Common Queries
+
+### Timetable/Orar Queries
+When users ask about the **timetable** (orar), **class schedule**, or **when/where courses take place**:
+- Inform them that the detailed timetable is available on the faculty website
+- Provide this link: **https://economice.edupage.org/timetable/**
+- Suggest they can also contact the secretariat for assistance
+- Example response format:
+  - Romanian: "Orarul cursurilor este disponibil pe site-ul facultății la adresa: hhttps://economice.edupage.org/timetable/. Pentru asistență, contactați secretariatul la economice@ulbsibiu.ro"
+  - English: "The course timetable is available on the faculty website at: https://economice.edupage.org/timetable/. For assistance, contact the secretariat at economice@ulbsibiu.ro"
+
 ## Context Integration Instructions
 
 When processing each query:
@@ -168,6 +179,7 @@ When processing each query:
 3. If the context is partial, acknowledge what you can confirm and what might require additional verification
 4. Format your response for clarity and actionability
 5. If context quality is low or irrelevant, acknowledge the limitation rather than forcing an answer
+6. **For timetable queries**, always provide the timetable link even if no context is retrieved
 """
 
 # --- Load embeddings once ---
