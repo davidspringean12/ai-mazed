@@ -30,15 +30,17 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
     const parts: (string | React.ReactElement)[] = [];
     let currentIndex = 0;
 
-    const markdownRegex = /(\[([^\]]+)\]\(([^)]+)\))|(\*\*([^*]+)\*\*)/g;
+    // Regex to match: markdown links [text](url), bold **text**, and plain URLs
+    const combinedRegex = /(\[([^\]]+)\]\(([^)]+)\))|(\*\*([^*]+)\*\*)|(https?:\/\/[^\s]+)/g;
     let match;
 
-    while ((match = markdownRegex.exec(content)) !== null) {
+    while ((match = combinedRegex.exec(content)) !== null) {
       if (match.index > currentIndex) {
         const textBefore = content.substring(currentIndex, match.index);
         parts.push(textBefore);
       }
 
+      // Markdown link [text](url)
       if (match[1]) {
         parts.push(
           <a
@@ -55,11 +57,31 @@ export function MessageBubble({ message, onFeedback }: MessageBubbleProps) {
             {match[2]}
           </a>
         );
-      } else if (match[4]) {
+      } 
+      // Bold text **text**
+      else if (match[4]) {
         parts.push(
           <strong key={`bold-${match.index}`} className="font-semibold">
             {match[5]}
           </strong>
+        );
+      }
+      // Plain URL
+      else if (match[6]) {
+        parts.push(
+          <a
+            key={`url-${match.index}`}
+            href={match[6]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`font-medium underline transition-colors ${
+              isUser
+                ? 'text-blue-100 hover:text-white'
+                : 'text-blue-600 hover:text-blue-700'
+            }`}
+          >
+            {match[6]}
+          </a>
         );
       }
 

@@ -40,6 +40,7 @@ function App() {
           messages={messages}
           isLoading={isLoading}
           onFeedback={submitFeedback}
+          onSend={sendMessage}
         />
 
         <InputBox onSend={sendMessage} disabled={isLoading} />

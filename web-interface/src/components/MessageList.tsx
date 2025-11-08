@@ -9,9 +9,10 @@ interface MessageListProps {
   messages: Message[];
   isLoading: boolean;
   onFeedback: (messageId: number, rating: 'helpful' | 'not_helpful') => void;
+  onSend: (message: string) => void;
 }
 
-export function MessageList({ messages, isLoading, onFeedback }: MessageListProps) {
+export function MessageList({ messages, isLoading, onFeedback, onSend }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -74,18 +75,21 @@ export function MessageList({ messages, isLoading, onFeedback }: MessageListProp
               { icon: '💰', text: 'Burse și facilități studenți' },
               { icon: '❓', text: 'Întrebări generale' },
             ].map((item, index) => (
-              <motion.div
+              <motion.button
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1 }}
-                className="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onSend(item.text)}
+                className="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               >
                 <span className="text-2xl">{item.icon}</span>
                 <span className="text-sm text-slate-700 text-left">
                   {item.text}
                 </span>
-              </motion.div>
+              </motion.button>
             ))}
           </motion.div>
         </motion.div>

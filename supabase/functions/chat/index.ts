@@ -41,6 +41,9 @@ You retrieve and answer questions about:
 - Provide **actionable next steps** when relevant
 - Structure complex answers with clear sections
 - **Include relevant links** when a URL is provided in the context - format as: "Pentru mai multe detalii, consultați: [link]" or "For more details, visit: [link]"
+- **DO NOT use markdown formatting** in your responses (no #, ##, ###, **, __, etc.)
+- Use plain text with bullet points (-) for lists
+- Use UPPERCASE or line breaks for emphasis instead of markdown headers
 
 ### 4. **Cultural & Academic Context**
 - Understand Romanian higher education terminology (e.g., restanță, colocviu, examen, referat)
@@ -85,7 +88,7 @@ When processing each query:
 const URL_MAPPINGS = {
   "data/departament.txt": "https://economice.ulbsibiu.ro/departament/",
   "data/cercetare.txt": "https://economice.ulbsibiu.ro/cercetare",
-  "data/structura-2025-2026.txt": "https://economice.ulbsibiu.ro/calendar-academic",
+  "data/structura-2025-2026.txt": "https://economice.ulbsibiu.ro/structura-2025-2026/",
   "data/licentamk.txt": "https://economice.ulbsibiu.ro/programe-studii"
 };
 const FALLBACK_URL = "https://economice.ulbsibiu.ro";

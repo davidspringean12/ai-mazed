@@ -1,0 +1,67 @@
+Examen de finalizare studii #EconomiceULBS
+Studii de licență - EQF 6
+Anul III
+8 decembrie 2025
+Sesiunea: 15-19 iulie 2026
+Ghidul studentului
+ Meniu Licență
+MK
+BA
+BI
+FB
+ECTS
+Management
+CIG
+Informatică economică (în limba engleză)
+Bogoslov Andreea
+Modelarea și gestionarea bazelor de date relaționale pentru companii / Modeling and managing relational databases for companies
+Bogoslov Andreea
+Utilizarea tehnologiilor informatice pentru optimizarea proceselor de afaceri / The use of information technologies for optimizing business processes
+Bogoslov Andreea
+Transformarea digitală a companiilor prin soluții AI / Digital transformation of companies through AI solutions
+Bogoslov Andreea
+Python as a development tool for digital innovation in the economic environment
+Bogoslov Andreea
+Enhancing business efficiency through Python-based software solutions
+Bogoslov Andreea
+Python-based modeling and analysis of complex economic processes
+Cristescu Marian
+Baze de date avansate
+Cristescu Marian
+Baze de date distribuite, sisteme de gestiune a bazelor de date
+Cristescu Marian
+Tehnologii Web, limbaje de scripting, OOP
+Cristescu Marian
+Sisteme informatice integrate și colaborative
+Cristescu Marian
+Știința datelor
+Cristescu Marian
+Big Data, IoT, Data Warehouse
+Cristescu Marian
+Modelarea, analiza, proiectarea, dezvoltarea, implementarea sistemelor informatice integrate și colaborative
+Cristescu Marian
+Instrumente IT&C pentru susținerea activității financiar-contabile
+Marginean Silvia
+Politicile europene și impactul acestora asupra economiilor naționale
+Marginean Silvia
+Creștere economică, fluctuații, crize - analize pe România/UE/global
+Popa Cristina
+Macroeconomie
+Sbarcea Ioana
+Statistical analysis - micro and macroeconomic approaches
+Stoica Eduard
+Sisteme de tip ERP și transformarea digitală
+Stoica Eduard
+Performance Dashboard for Local Public Administration – Indicators of Transparency, Efficiency and Good Governance
+Stoica Eduard
+Access Control and Attendance Management System for an Educational Institution
+Stoica Eduard
+Integration of Open Data APIs into a Business Intelligence Platform for Local Public Administration
+Stoica Eduard
+Implementation of a Digital Signature and Certificate Management Module in Web Applications
+Stoica Eduard
+Development of a KPI Monitoring System for Small and Medium Enterprises (SMEs)
+Stoica Eduard
+Participatory Dashboard for Citizen Involvement in Local Decision-Making – Project Monitoring, Feedback and Suggestions
+Terchila Sorin
+European Economy

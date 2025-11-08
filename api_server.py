@@ -28,13 +28,19 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 with open('url_mappings.json', 'r', encoding='utf-8') as f:
     url_mappings = json.load(f)
 
-# Load embeddings (cached)
-print("Loading embeddings...")
-data = supabase.table("embeddings").select("*").execute().data
-vectors = np.array([row["embedding"] for row in data])
-texts = [row["content"] for row in data]
-sources = [row["source"] for row in data]
-print(f"Loaded {len(vectors)} embeddings")
+# Function to load embeddings from Supabase
+def load_embeddings():
+    """Load embeddings from Supabase"""
+    print("Loading embeddings from Supabase...")
+    data = supabase.table("embeddings").select("*").execute().data
+    vectors = np.array([row["embedding"] for row in data])
+    texts = [row["content"] for row in data]
+    sources = [row["source"] for row in data]
+    print(f"Loaded {len(vectors)} embeddings")
+    return vectors, texts, sources
+
+# Load embeddings initially
+vectors, texts, sources = load_embeddings()
 
 # System prompt
 SYSTEM_PROMPT = """# System Role: University Information Assistant
@@ -71,6 +77,9 @@ You retrieve and answer questions about:
 - Provide **actionable next steps** when relevant
 - Structure complex answers with clear sections
 - **Include relevant links** when a URL is provided in the context - format as: "Pentru mai multe detalii, consultați: [link]" or "For more details, visit: [link]"
+- **DO NOT use markdown formatting** in your responses (no #, ##, ###, **, __, etc.)
+- Use plain text with bullet points (-) for lists
+- Use UPPERCASE or line breaks for emphasis instead of markdown headers
 
 ### 4. **Cultural & Academic Context**
 - Understand Romanian higher education terminology (e.g., restanță, colocviu, examen, referat)
@@ -203,6 +212,19 @@ QUESTION:
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({'status': 'ok', 'embeddings_loaded': len(vectors)})
+
+@app.route('/api/reload-embeddings', methods=['POST'])
+def reload_embeddings():
+    """Reload embeddings from Supabase"""
+    global vectors, texts, sources
+    try:
+        vectors, texts, sources = load_embeddings()
+        return jsonify({
+            'status': 'success',
+            'embeddings_loaded': len(vectors)
+        })
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
 
 if __name__ == '__main__':
     print("Starting chatbot API server...")

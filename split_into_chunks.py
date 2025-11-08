@@ -1,5 +1,6 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import glob
+import json
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=500,
@@ -20,3 +21,9 @@ for file_path in glob.glob("data/*.txt"):
         })
 
 print(f"✅ Split into {len(all_docs)} chunks.")
+
+# Save chunks to JSON file
+with open("data/chunks.json", "w", encoding="utf-8") as f:
+    json.dump(all_docs, f, ensure_ascii=False, indent=2)
+
+print(f"✅ Saved {len(all_docs)} chunks to data/chunks.json")
