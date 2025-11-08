@@ -69,7 +69,7 @@ export function MessageList({ messages, isLoading, onFeedback, onSend }: Message
           >
             {[
               { icon: '📅', text: 'Calendarul academic și orarul cursurilor' },
-              { icon: '🎓', text: 'Programe de licență și master' },
+              { icon: '🎓', text: 'Programe de studii' },
               { icon: '👨‍🏫', text: 'Profesori și departamente' },
               { icon: '🔬', text: 'Activități de cercetare' },
               { icon: '💰', text: 'Burse și facilități studenți' },

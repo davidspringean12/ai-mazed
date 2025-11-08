@@ -236,7 +236,7 @@ QUESTION:
 {query}"""
     
     response = client.chat.completions.create(
-        model="gpt-5-mini",
+        model="gpt-5",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}

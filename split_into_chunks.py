@@ -2,10 +2,12 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 import glob
 import json
 
+# Increased chunk size for better context preservation
+# Larger overlap to maintain continuity across chunks
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50,
-    separators=["\n\n", "\n", ".", " "]
+    chunk_size=1200,  # Increased from 500 to capture more complete information
+    chunk_overlap=200,  # Increased from 50 to ensure context continuity
+    separators=["\n\n", "\n", ". ", " "]  # Better separation hierarchy
 )
 
 all_docs = []
